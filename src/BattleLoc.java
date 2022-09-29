@@ -39,17 +39,29 @@ public class BattleLoc extends Locations {
     public boolean combat(int monsterNum){    
         for(int i =1;i<=monsterNum;i++){
             this.getMonster().setHealth(this.getMonster().getOrjinalHealth());
+            System.out.println();
             playerStats();
             monsterStats(i);
             while(this.getPlayer().getHealth() > 0 && this.getMonster().getHealth() > 0){
                 System.out.print("<V>ur veya <K>aç : ");
                 String selectCombat=scan.nextLine().toUpperCase();
                 if(selectCombat.equals("V")){
-                    System.out.println("Siz Canavara Vurdunuz!");
-                    this.getMonster().setHealth(this.getMonster().getHealth() - this.getPlayer().getTotalDamage());
-                    afterHit();
-                    if(this.getMonster().getHealth() > 0){
-                        System.out.println();
+                    double whoIsStart=Math.random()*100;// Oyuncu bir canavarla karşılaştığında ilk hamleyi kimin yapacağını, %50 şans ile belirleyen kod satırı
+                    if(whoIsStart<=50){
+                        System.out.println("Siz Canavara Vurdunuz!");
+                        this.getMonster().setHealth(this.getMonster().getHealth() - this.getPlayer().getTotalDamage());
+                        afterHit();
+                        if(this.getMonster().getHealth() > 0){
+                            System.out.println();
+                            System.out.println("Canavar Size Vurdu!");
+                            int monsterDamage = this.getMonster().getDamage() - this.getPlayer().getInv().getArmor().getDodge();
+                            if(monsterDamage < 0){
+                                monsterDamage = 0;
+                            }
+                            this.getPlayer().setHealth(this.getPlayer().getHealth() - monsterDamage );
+                            afterHit();
+                        }
+                    }else{
                         System.out.println("Canavar Size Vurdu!");
                         int monsterDamage = this.getMonster().getDamage() - this.getPlayer().getInv().getArmor().getDodge();
                         if(monsterDamage < 0){
@@ -57,7 +69,13 @@ public class BattleLoc extends Locations {
                         }
                         this.getPlayer().setHealth(this.getPlayer().getHealth() - monsterDamage );
                         afterHit();
-                    }
+                        if(this.getPlayer().getHealth()>0){
+                            System.out.println();
+                            System.out.println("Siz Canavara Vurdunuz!");
+                            this.getMonster().setHealth(this.getMonster().getHealth() - this.getPlayer().getTotalDamage());
+                            afterHit();
+                        }
+                    }                   
                 }else{
                     return false;
                 }
