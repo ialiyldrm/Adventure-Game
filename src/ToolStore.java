@@ -32,6 +32,8 @@ public class ToolStore extends NormalLoc {
                     System.out.println("Tekrar bekleriz!");
                     showMenu = false;
                     break;
+                default:
+                    System.out.println("Lütfen geçerli bir işlem giriniz!");
             }
         }
         return true;
