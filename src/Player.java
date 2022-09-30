@@ -12,7 +12,6 @@ public class Player {
     private Random random=new Random();
     private Inventory inv;
     private int itemNumber=0;
-    private boolean locBlok=false;
     
     
     
@@ -189,13 +188,4 @@ public class Player {
     public void setItemNumber(int itemNumber) {
         this.itemNumber = itemNumber;
     }
-
-    public boolean getLocBlok() {
-        return locBlok;
-    }
-
-    public void setLocBlok(boolean locBlok) {
-        this.locBlok = locBlok;
-    }
-    
 }

@@ -46,19 +46,53 @@ public class Game {
                     location = new ToolStore(player);
                     break;
                 case 3:
-                    if(player.getLocBlok()){
-                        System.out.println("Bu bölgedeki tüm canavarları öldürdünüz!Başka bölge seçiniz!");
-                        continue;
-                    }else{
+                    boolean enterCave = true;
+                    for (Item i: player.getInv().getItemList()) {
+                        if(i.getName().equals("Yemek")){
+                            System.out.println("Bu bölgedeki itemi aldınız!Başka bölge seçiniz!");
+                            enterCave=false;
+                            break;
+                        }
+                    }
+                    if(enterCave){
                         location = new Cave(player);
                         break;
-                    }                   
+                    }else{
+                        location = new SafeHouse(player);
+                        break;
+                    }                                          
                 case 4:
-                    location = new Forest(player);
-                    break;
+                    boolean enterForest = true;
+                    for (Item i: player.getInv().getItemList()) {
+                        if(i.getName().equals("Odun")){
+                            System.out.println("Bu bölgedeki itemi aldınız!Başka bölge seçiniz!");
+                            enterForest=false;
+                            break;
+                        }
+                    }
+                    if(enterForest){
+                        location = new Forest(player);
+                        break;
+                    }else{
+                        location = new SafeHouse(player);
+                        break;
+                    }                   
                 case 5:
-                    location = new River(player);
-                    break;
+                    boolean enterRiver = true;
+                    for (Item i: player.getInv().getItemList()) {
+                        if(i.getName().equals("Su")){
+                            System.out.println("Bu bölgedeki itemi aldınız!Başka bölge seçiniz!");
+                            enterRiver=false;
+                            break;
+                        }
+                    }
+                    if(enterRiver){
+                        location = new River(player);
+                        break;
+                    }else{
+                        location = new SafeHouse(player);
+                        break;
+                    }                   
                 case 6:
                     location = new Mine(player);
                     break;

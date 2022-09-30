@@ -33,14 +33,13 @@ public class BattleLoc extends Locations {
                     if(!this.getName().equals("Maden")){
                         System.out.println(this.item.getName() + " ödülünü kazandınız.");                       
                         this.getPlayer().setItemNumber(this.getPlayer().getItemNumber()+1);
-                        
+                        this.getPlayer().getInv().setItemList(this.item);                       
                     }
                     if(this.getPlayer().getItemNumber()==3){
                         System.out.println("Tüm itemleri topladınız.Oyunu kazanmak için Güvenli Ev'e gidiniz! ");
                     }
                     setLocSituation(true);
                     isDelete();
-                    this.getPlayer().setLocBlok(true);
                     return true;
                 }
             }           
