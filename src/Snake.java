@@ -9,7 +9,7 @@ public class Snake extends Monsters {
 
     public int randomSnakeDamage(){
         Random r=new Random();
-        return r.nextInt(this.getDamage()) + 3; 
+        return r.nextInt(this.getDamage()) + 4; 
     }
     
 }
