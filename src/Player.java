@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Player {
@@ -8,7 +9,11 @@ public class Player {
     private String  charName;
     private String name;
     private Scanner scan=new Scanner(System.in);
+    private Random random=new Random();
     private Inventory inv;
+    private int itemNumber=0;
+    private boolean locBlok=false;
+    
     
     
     public Player(String name){
@@ -65,8 +70,57 @@ public class Player {
                 ", Zırh : " + this.getInv().getArmor().getDodge() + 
                 ", Sağlık :" + this.getHealth() +
                 ", Para :" + this.getMoney());
-        
+    }
 
+    public void awardForMine(int possibility){//Şans oranlarına göre silah,zırh veya para kazanılmasını sağlayan metod.
+        Weapons[] weapons={
+                Weapons.getWeaponsObjByID(3),
+                Weapons.getWeaponsObjByID(3),
+                Weapons.getWeaponsObjByID(2),
+                Weapons.getWeaponsObjByID(2),
+                Weapons.getWeaponsObjByID(2),
+                Weapons.getWeaponsObjByID(1),
+                Weapons.getWeaponsObjByID(1),
+                Weapons.getWeaponsObjByID(1),
+                Weapons.getWeaponsObjByID(1),
+                Weapons.getWeaponsObjByID(1)};
+        
+        Armors[] armors={
+                Armors.getArmorsObjByID(3),
+                Armors.getArmorsObjByID(3),
+                Armors.getArmorsObjByID(2),
+                Armors.getArmorsObjByID(2),
+                Armors.getArmorsObjByID(2),
+                Armors.getArmorsObjByID(1),
+                Armors.getArmorsObjByID(1),
+                Armors.getArmorsObjByID(1),
+                Armors.getArmorsObjByID(1),
+                Armors.getArmorsObjByID(1)};
+
+        int money[] = { 1, 1, 1, 1, 1, 5, 5, 5, 10, 10 };
+        int possRange=possibility;
+        int percet ;
+        if(possRange<3){
+            percet =random.nextInt(10);
+            Weapons weapon=weapons[percet];
+            System.out.println("silah kazandınız!");
+            this.getInv().setWeapon(weapon);
+            System.out.println("Güncel silahınız: " + this.getInv().getWeapon().getName());
+        }else if(2 < possRange && possRange < 6){
+            percet =random.nextInt(10);
+            Armors armor=armors[percet];
+            System.out.println("Zırh kazandınız!");
+            this.getInv().setArmor(armor);
+            System.out.println("Güncel zırhınız: " + this.getInv().getArmor().getName());
+        }else if(5 < possRange && possRange < 11){
+            percet =random.nextInt(10);
+            int gain = money[percet];
+            System.out.println("Para kazandınız! ");
+            this.setMoney(this.getMoney() + gain);
+            System.out.println("Güncel paranız: " + this.getMoney());
+        }else{
+            System.out.println("Hiçbir şey kazanamadınız.");
+        }
     }
 
     public int getTotalDamage(){
@@ -127,4 +181,21 @@ public class Player {
     public void setOrjinalHealth(int orjinalHealth) {
         this.orjinalHealth = orjinalHealth;
     }
+
+    public int getItemNumber() {
+        return itemNumber;
+    }
+
+    public void setItemNumber(int itemNumber) {
+        this.itemNumber = itemNumber;
+    }
+
+    public boolean getLocBlok() {
+        return locBlok;
+    }
+
+    public void setLocBlok(boolean locBlok) {
+        this.locBlok = locBlok;
+    }
+    
 }

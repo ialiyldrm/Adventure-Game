@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Game {
     private Scanner scan=new Scanner(System.in);
+    
 
     public void start(){
         System.out.println("Macera Oyununa Hoşgeldiniz!");
@@ -33,14 +34,25 @@ public class Game {
                     location = null;
                     break;
                 case 1:
-                    location = new SafeHouse(player);
-                    break;
+                    if(player.getItemNumber()==3){
+                        System.out.println("Tebrikler adada başarılı bir şekilde hayatta kaldınız.Oyunu kazandınız!!!");
+                        location = null;
+                        break;
+                    }else{
+                        location = new SafeHouse(player);
+                        break;
+                    }                                       
                 case 2:
                     location = new ToolStore(player);
                     break;
                 case 3:
-                    location = new Cave(player);
-                    break;
+                    if(player.getLocBlok()){
+                        System.out.println("Bu bölgedeki tüm canavarları öldürdünüz!Başka bölge seçiniz!");
+                        continue;
+                    }else{
+                        location = new Cave(player);
+                        break;
+                    }                   
                 case 4:
                     location = new Forest(player);
                     break;

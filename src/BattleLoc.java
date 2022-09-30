@@ -2,26 +2,27 @@ import java.util.Random;
 
 public class BattleLoc extends Locations {
     private Monsters monster;
-    private String award;
+    private Item item;
     private int maxMonster;
+    private static boolean LocSituation=false;//Canavar olan bölgeler güvenli değil.Canavar varsa false yoksa true döndürüyor.
 
-    public BattleLoc(Player player, String name, Monsters monster,String award,int maxMonster) {
+    public BattleLoc(Player player, String name, Monsters monster,Item item,int maxMonster) {
         super(player, name);
         this.monster = monster;
-        this.award   = award;
-        this.maxMonster = maxMonster;
-        
+        this.item = item;
+        this.maxMonster = maxMonster;       
     }
 
     @Override
     public boolean onLocation() {
+        
         int monsterNum = this.randomMonsterNumber();
         System.out.println("Şu an buradasınız : " + this.getName());
         System.out.println("Dikkatli ol!!! Burada " + monsterNum + " tane " + this.getMonster().getName() + " yaşıyor!!!");
         System.out.print("<S>avaş veya <K>aç : ");
 
         String selectCase = scan.nextLine().toUpperCase();
-        
+
         if(selectCase.equals("S")){
             if(combat(monsterNum)){   
                 if(this.getPlayer().getHealth() <= 0){
@@ -29,9 +30,24 @@ public class BattleLoc extends Locations {
                     return false;
                 }else{
                     System.out.println(this.getName() + " tüm düşmanları yendiniz!");
+                    if(!this.getName().equals("Maden")){
+                        System.out.println(this.item.getName() + " ödülünü kazandınız.");                       
+                        this.getPlayer().setItemNumber(this.getPlayer().getItemNumber()+1);
+                        
+                    }
+                    if(this.getPlayer().getItemNumber()==3){
+                        System.out.println("Tüm itemleri topladınız.Oyunu kazanmak için Güvenli Ev'e gidiniz! ");
+                    }
+                    setLocSituation(true);
+                    isDelete();
+                    this.getPlayer().setLocBlok(true);
                     return true;
                 }
             }           
+        }else{
+            System.out.println("Tüm canavarlardan kaçarak item kazanamazsınız!");
+            System.out.println("Şu ana kadar " + this.getPlayer().getItemNumber() + " tane item topladınız!");
+            System.out.println("Bölgeye tekrar gelip tüm canavarlarla savaşınız!"); 
         }        
         return true;
     }
@@ -75,24 +91,31 @@ public class BattleLoc extends Locations {
                             this.getMonster().setHealth(this.getMonster().getHealth() - this.getPlayer().getTotalDamage());
                             afterHit();
                         }
-                    }                   
+                    }                                      
                 }else{
+                    System.out.println("Tüm canavarları yenmeden item kazanamazsınız!");
+                    System.out.println("Şu ana kadar " + this.getPlayer().getItemNumber() + " tane item topladınız!");
+                    System.out.println("Bölgeye tekrar gelip tüm canavarlarla savaşınız!");
                     return false;
                 }
             }
 
             if(this.getMonster().getHealth() < this.getPlayer().getHealth()){
                 System.out.println("Düşmanı yendiniz!");
-                System.out.println(this.getMonster().getAward() + " para kazandınız !");
-                this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getMonster().getAward());
-                System.out.println("Güncel paranız :" + this.getPlayer().getMoney());
+                if(this.getMonster().getName().equals("Yılan")){
+                    //buraya para veya envanter kazanma olasılığına göre metod gelecek
+                    this.getPlayer().awardForMine(this.getMonster().getAward());
+                    
+                }else{
+                    System.out.println(this.getMonster().getAward() + " para kazandınız !");
+                    this.getPlayer().setMoney(this.getPlayer().getMoney() + this.getMonster().getAward());
+                    System.out.println("Güncel paranız :" + this.getPlayer().getMoney());                   
+                }                
             }
-
         }
-
         return true;
-
     }
+
     public void afterHit(){
         System.out.println("Canınız: " + this.getPlayer().getHealth());
         System.out.println(this.getMonster().getName()+ " canı: " + this.monster.getHealth());
@@ -119,6 +142,11 @@ public class BattleLoc extends Locations {
         System.out.println("Ödül   : " + this.getMonster().getAward());
         System.out.println();
     }
+    public static void isDelete() {
+        if(getLocSituation()){
+            System.out.println("Bölgedeki tüm canavarlar öldü.Bu bölgeye erişemezsiniz.Başka bölge seçiniz");
+        }    
+    }
 
     public int randomMonsterNumber(){
         Random r = new Random();
@@ -134,14 +162,6 @@ public class BattleLoc extends Locations {
         this.monster = monster;
     }
 
-    public String getAward() {
-        return award;
-    }
-
-    public void setAward(String award) {
-        this.award = award;
-    }
-
     public int getMaxMonster() {
         return maxMonster;
     }
@@ -149,5 +169,14 @@ public class BattleLoc extends Locations {
     public void setMaxMonster(int maxMonster) {
         this.maxMonster = maxMonster;
     }
-   
+
+    public static boolean getLocSituation() {
+        return LocSituation;
+    }
+
+    public static void setLocSituation(boolean locSituation) {
+        LocSituation = locSituation;
+    }
+    
+    
 }   

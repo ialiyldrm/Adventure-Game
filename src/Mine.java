@@ -1,7 +1,7 @@
 public class Mine extends BattleLoc {
 
     public Mine(Player player) {
-        super(player, "Maden", new Snake(), "Para,Silah veya Zırh", 5);
+        super(player, "Maden", new Snake(), new Item("Şans"), 5);
     }
 /*
 Bu bölgenin amacı yenilen rakiplerden rastgele para, silah veya zırh kazanma ihtimali olması.
