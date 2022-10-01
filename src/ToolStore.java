@@ -1,4 +1,7 @@
+import java.util.Scanner;
+
 public class ToolStore extends NormalLoc {
+    private Scanner input=new Scanner(System.in);
 
     public ToolStore(Player player) {
         super(player, "Mağaza");
@@ -14,10 +17,10 @@ public class ToolStore extends NormalLoc {
             System.out.println("2 - Zırhlar  ");
             System.out.println("3 - Çıkış Yap");
             System.out.print("Seçiminiz:");
-            int selectCase = Locations.scan.nextInt();
+            int selectCase = input.nextInt();
             while(selectCase<1 || selectCase>3){
                 System.out.println("Geçersiz değer,tekrar giriniz : ");
-                selectCase = scan.nextInt();          
+                selectCase = input.nextInt();          
             }
             switch(selectCase){
                 case 1:
@@ -51,11 +54,11 @@ public class ToolStore extends NormalLoc {
     public void buyWeapon(){
         System.out.print("Bir silah seçiniz: ");
         
-        int selectWeaponId = scan.nextInt();
+        int selectWeaponId = input.nextInt();
         
         while(selectWeaponId < 0 || selectWeaponId > Weapons.weapons().length){
             System.out.println("Geçersiz değer,tekrar giriniz : ");
-            selectWeaponId = scan.nextInt();          
+            selectWeaponId = input.nextInt();          
         }
 
         if(selectWeaponId != 0){
@@ -88,11 +91,11 @@ public class ToolStore extends NormalLoc {
     public void buyArmor(){
         System.out.print("Bir zırh seçiniz: ");
         
-        int selectArmorId = scan.nextInt();
+        int selectArmorId = input.nextInt();
         
         while(selectArmorId < 0 || selectArmorId > Armors.armors().length){
             System.out.println("Geçersiz değer,tekrar giriniz : ");
-            selectArmorId = scan.nextInt();          
+            selectArmorId = input.nextInt();          
         }
 
         if(selectArmorId != 0){
