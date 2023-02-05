@@ -8,7 +8,7 @@ It is a text-based game made in Java.
 - Archer
 - Knight
 
-![Character](https://lh3.googleusercontent.com/vijfT1DfLZmOaOAPjyLosLBl5v9SALMkgfswCQd6mfJWTj3xzUywqVF4vMR7TnJNUx1F=s170)
+
 
 ## Monsters
 
@@ -17,7 +17,7 @@ It is a text-based game made in Java.
 - Bear
 - Snake
 
-![Monsters](https://lh3.googleusercontent.com/72rWMBj7TUrzr6y6WMsYusKT_LHlZaQHicgeK1aWqRiPScZ3zgpIfXSNMWNlEBIkm7RHDg=s170)
+
 
 ## Weapons
 
@@ -25,7 +25,7 @@ It is a text-based game made in Java.
 - Sword
 - Rifle
 
-![Weapons](https://lh3.googleusercontent.com/5ZAMR8bT7CKbv-9cKXNxd5nu9UD-LlAl2bBIZjdq6irs9IMwU8X33wy5NuEUeEP-VwO8iA=s158)
+
 
 ## Armors
 
@@ -33,7 +33,7 @@ It is a text-based game made in Java.
 - Medium
 - Heavy
 
-![Armors](https://lh3.googleusercontent.com/dwZfHYamIxPO44J9jEvClCHxvayt9KNPbBldgGYMIDzBxEymLkal1j9A-iEO2DttdeRnm9c=s164)
+
 
 ## Locations
 
